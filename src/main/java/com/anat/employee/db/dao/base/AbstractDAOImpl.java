@@ -47,9 +47,9 @@ public abstract class AbstractDAOImpl<Entity, ID extends Serializable> implement
     public List search(Map<String, Object> parameterMap) {
         Criteria criteria = getCurrentSession().createCriteria(clazz);
         Set<String> fieldName = parameterMap.keySet();
-        fieldName.stream().forEach((field) -> {
+        for (String field : fieldName) {
             criteria.add(Restrictions.ilike(field, parameterMap.get(field)));
-        });
+        }
         return criteria.list();
     }
 
